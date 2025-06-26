@@ -1,0 +1,13 @@
+GET http://127.0.0.1:8080/posts/retrieve
+
+###http://localhost:8080/swagger-ui/index.html
+
+POST http://127.0.0.1:8082/
+Content-Type: application/json
+
+{
+  "title": "",
+  "body": "",
+  "userId": 2
+}
+
