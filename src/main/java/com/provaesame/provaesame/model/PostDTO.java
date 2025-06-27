@@ -18,7 +18,7 @@ public class PostDTO {
 
     public PostDTO(int id,
             String title,
-            String body) {
+            String body, int userId) {
         this.id = id;
         this.title = title;
         this.body = body;
