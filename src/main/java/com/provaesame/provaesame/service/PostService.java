@@ -28,12 +28,23 @@ public class PostService implements IPostService {
         return new ModelMapper();
     }
 
+    public List<PostDTO> getPostsFromWeb() {
+        return webClientService.getPosts();
+    }
+
     public void retrievePostsFromWeb() {
         List<PostDTO> posts = webClientService.getPosts();
         posts.forEach(post -> {
             post.setId(0);
             createPost(post);
         }); 
+    }
+
+    @Override
+    public PostDTO createPost(PostDTO post) {
+        Post entity = modelMapper().map(post, Post.class);
+        repository.save(entity);
+        return modelMapper().map(entity, PostDTO.class);
     }
 
     @Override
@@ -46,12 +57,7 @@ public class PostService implements IPostService {
         return dtos;
     }
 
-    @Override
-    public PostDTO createPost(PostDTO post) {
-        Post entity = modelMapper().map(post, Post.class);
-        repository.save(entity);
-        return modelMapper().map(entity, PostDTO.class);
-    }
+    
 
     @Override
     public PostDTO getPostById(int id) {

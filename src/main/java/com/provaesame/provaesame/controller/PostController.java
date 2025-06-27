@@ -37,7 +37,7 @@ public class PostController {
             @ApiResponse(responseCode = "204", description = "Nessuna lista trovata"),
             @ApiResponse(responseCode = "400", description = "Richiesta non valida")
     })
-    @GetMapping("/retrieve")
+    @GetMapping("/retrieveAndSave")
     public ResponseEntity<List<PostDTO>> retrievePosts() {
        
         service.retrievePostsFromWeb();
@@ -45,6 +45,20 @@ public class PostController {
         if (posts.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
+        return ResponseEntity.ok(posts);
+    }
+
+    @GetMapping("/retrieveFromWeb")
+    public ResponseEntity<List<PostDTO>> retrieveFromWeb() {
+       
+        List<PostDTO> posts = service.getPostsFromWeb();
+        return ResponseEntity.ok(posts);
+    }
+
+    @GetMapping("/retrieveFromDB")
+    public ResponseEntity<List<PostDTO>> retrieveFromDB() {
+       
+        List<PostDTO> posts = service.getAllPosts();
         return ResponseEntity.ok(posts);
     }
 }
